@@ -5,20 +5,6 @@ const NotFoundError = require('../errors/not-found-err');
 const ConflictError = require('../errors/conflict-err');
 const { NODE_ENV, JWT_SECRET } = require('../utils/settings');
 
-// module.exports.getUsers = (req, res, next) => {
-//   User.find({})
-//     .then((users) => res.send(users))
-//     .catch(next);
-// };
-
-// module.exports.getUserById = (req, res, next) => {
-//   const { userId } = req.params;
-//   User.findById(userId)
-//     .orFail(() => new NotFoundError(`Пользователь по указанному _id='${userId}' не найден`))
-//     .then((user) => res.send(user))
-//     .catch(next);
-// };
-
 module.exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then((hash) => User.create({ ...req.body, password: hash }))
