@@ -1,19 +1,20 @@
 const Movie = require('../models/movie');
 const NotFoundError = require('../errors/not-found-err');
 const ForbiddenError = require('../errors/forbidden-err');
+const { movieNotFoundErrorMessage, forbiddenErrorMessage } = require('../utils/constants');
 
 const getMovieById = (movieId) => Movie.findById(movieId)
-  .orFail(() => new NotFoundError(`Фильм с _id='${movieId}' не найден`));
+  .orFail(() => new NotFoundError(movieNotFoundErrorMessage(movieId)));
 
 const checkMovieOwner = (userId, movie) => {
   if (userId !== movie.owner._id.toString()) {
-    return Promise.reject(new ForbiddenError('Отказано в доступе'));
+    return Promise.reject(new ForbiddenError(forbiddenErrorMessage));
   }
   return movie;
 };
 
 const deleteMovie = (movieId) => Movie.findByIdAndRemove(movieId)
-  .orFail(() => new NotFoundError(`Фильм с _id='${movieId}' не найден`));
+  .orFail(() => new NotFoundError(movieNotFoundErrorMessage(movieId)));
 
 module.exports.deleteCurrentUserMovie = (req, res, next) => {
   const movieId = req.params._id;

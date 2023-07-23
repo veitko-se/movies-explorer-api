@@ -12,7 +12,6 @@ module.exports.simpleCors = (req, res, next) => {
   next();
 };
 
-// eslint-disable-next-line consistent-return
 module.exports.complexCors = (req, res, next) => {
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
@@ -20,7 +19,8 @@ module.exports.complexCors = (req, res, next) => {
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
+    res.end();
+  } else {
+    next();
   }
-  next();
 };

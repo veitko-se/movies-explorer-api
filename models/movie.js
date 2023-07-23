@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { VALID_URL_REGEX } = require('../utils/constants');
+const { VALID_URL_REGEX, linkValidateMessage } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,7 +27,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => VALID_URL_REGEX.test(v),
-      message: (props) => `${props.value} is not a valid link!`,
+      message: (props) => linkValidateMessage(props.value),
     },
   },
   trailerLink: {
@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => VALID_URL_REGEX.test(v),
-      message: (props) => `${props.value} is not a valid link!`,
+      message: (props) => linkValidateMessage(props.value),
     },
   },
   thumbnail: {
@@ -43,7 +43,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => VALID_URL_REGEX.test(v),
-      message: (props) => `${props.value} is not a valid link!`,
+      message: (props) => linkValidateMessage(props.value),
     },
   },
   owner: {
