@@ -16,14 +16,15 @@ mongoose.connect(DB_URL);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(limiter);
 app.use(helmet());
 app.disable('x-powered-by');
 
 app.use(requestLogger);
+app.use(limiter);
 app.use(simpleCors);
 app.use(complexCors);
 app.use(router);
+
 app.use(errorLogger);
 app.use(errors()); // ошибки от Celebrate
 app.use(badRequestErrorHandler);
