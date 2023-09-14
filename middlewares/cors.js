@@ -1,7 +1,7 @@
 const allowedCors = [
-  'https://mesto.veitko-se.students.nomoredomains.work',
-  'http://mesto.veitko-se.students.nomoredomains.work',
-  'localhost:3000',
+  'https://bitfilms.veitko-se.nomoredomains.xyz',
+  'http://bitfilms.veitko-se.nomoredomains.xyz',
+  'http://localhost:3000',
 ];
 
 module.exports.simpleCors = (req, res, next) => {
